@@ -1,6 +1,4 @@
-﻿using System.Transactions;
-
-namespace Que_09
+﻿namespace Que_10
 {
     internal class Program
     {
@@ -17,17 +15,54 @@ namespace Que_09
         Finance = 3
     }
 
+    class Supervisor : Employee
+    {
+        private int _subCordinates;
+
+        public Supervisor() {}
+
+        public Supervisor(string des, double sal, DepartmentType dep, int subCord) : base(des, sal, dep)
+        {
+            _subCordinates = subCord;
+        }
+
+        public void Accept()
+        {
+            base.Accept();
+            Console.Write("Enter the sub ordinates : ");
+            _subCordinates = Convert.ToInt32(Console.ReadLine());
+        }
+
+        public void Print()
+        {
+            base.Print();
+            Console.WriteLine("Sun Ordinates : " + _subCordinates);
+        }
+
+        public string ToString()
+        {
+            return base.ToString() + " " + _subCordinates;
+        }
+
+        public int SubCordinates
+        {
+            get { return _subCordinates; }
+            set { _subCordinates = value; }
+        }
+
+    }
+
     class Manager : Employee
     {
         private double _Bonus;
 
         public Manager() { }
 
-        public Manager(string des, double sal, DepartmentType dep,double bonus): base( des, sal,  dep)
+        public Manager(string des, double sal, DepartmentType dep, double bonus) : base(des, sal, dep)
         {
             _Bonus = bonus;
         }
-       
+
         public void Accept()
         {
             base.Accept();
@@ -38,7 +73,7 @@ namespace Que_09
         public void Print()
         {
             base.Print();
-            Console.WriteLine("Bonus : "+ _Bonus);
+            Console.WriteLine("Bonus : " + _Bonus);
         }
 
         public string ToString()
@@ -279,5 +314,5 @@ namespace Que_09
             return _Day + "/" + _Month + "/" + _Year;
         }
 
-    }                                                       
+    }
 }
