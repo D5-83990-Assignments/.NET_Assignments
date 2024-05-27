@@ -1,135 +1,79 @@
-﻿using System.Reflection;
-using System.Xml.Linq;
-
-namespace Que_04
+﻿namespace Que_06
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Student[] arr = null ;
-            CreateArray(arr);
+            Date d1 = new Date(10,6,2001);
+            Console.WriteLine(d1.ToString());
+            Console.WriteLine(d1.IsValid());
             Console.ReadLine();
-            
-        }
 
-        static void CreateArray(Student[] stdArr) 
-        {
-            Console.Write("Enter the size of an array :- ");
-            int x = Convert.ToInt32(Console.ReadLine());
-            stdArr = new Student[x];
-            AcceptInfo(stdArr);
-        }
 
-        static void AcceptInfo(Student[] stdArr)
-        {
-            for(int i = 0; i < stdArr.Length; i++) 
-            {
-                stdArr[i] = new Student();
-                stdArr[i].AcceptDetails();
-            }
-            PrintInfo(stdArr);
-        }
-
-        static void PrintInfo(Student[] stdArr)
-        {
-            foreach (Student std in stdArr)
-            {
-                std.PrintDetails();
-            }
-            ReverseArray(stdArr);
-        }
-
-        static void ReverseArray(Student[] stdArr)
-        {
-            Console.WriteLine("Reverse Array");
-            for(int i = stdArr.Length-1; i >= 0; i--) 
-            {
-                stdArr[i].PrintDetails();
-                Console.WriteLine();
-            }
         }
     }
 
-    struct Student
+    class Date
     {
-        private string _Name;
-        private int _Age;
-        private bool _Gender;
-        private int _Std;
-        private char _Div;
-        private double _Marks;
+        private int _Day;
+        private int _Month;
+        private int _Year;
 
-        public Student(string Name, int Age, bool Gender, int Std, char Div, double Marks)
+        public Date(int Day,int Month,int Year)
         {
-            _Name = Name;
-            _Age = Age;
-            _Gender = Gender;
-            _Std = Std;
-            _Div = Div;
-            _Marks = Marks;
+            _Day = Day;
+            _Month = Month;
+            _Year = Year;
         }
 
-        public void AcceptDetails()
+        public void AcceptDate()
         {
-            Console.Write("Enter name of student :- ");
-            _Name = Console.ReadLine();
-            Console.Write("Enter age of student :- ");
-            _Age = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Enter gender of student :- ");
-            _Gender = Convert.ToBoolean(Console.ReadLine());
-            Console.Write("Enter std of student :- ");
-            _Std = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Enter division of student :- ");
-            _Div = Convert.ToChar(Console.ReadLine());
-            Console.Write("Enter marks of student :- ");
-            _Marks =Convert.ToDouble(Console.ReadLine());
+            Console.Write("Enter the day :- ");
+            _Day = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter the month :- ");
+            _Month = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter the year :- ");
+            _Year = Convert.ToInt32(Console.ReadLine());
         }
 
-        public double Marks
+        public int Year
         {
-            get { return _Marks; }
-            set { _Marks = value; }
+            get { return _Year; }
+            set { _Year = value; }
         }
 
 
-        public char Div
+        public int Month
         {
-            get { return _Div; }
-            set { _Div = value; }
+            get { return _Month; }
+            set { _Month = value; }
         }
 
 
-        public int Std
+        public int Day
         {
-            get { return _Std; }
-            set { _Std = value; }
+            get { return _Day; }
+            set { _Day = value; }
         }
 
-
-        public bool Gender  
+        public void PrintDate()
         {
-            get { return _Gender; }
-            set { _Gender = value; }
+            Console.WriteLine("Date :- "+_Day + "/" + _Month + "/" + _Year);
         }
 
-
-        public int Age
+        public bool IsValid()
         {
-            get { return _Age; }
-            set { _Age = value; }
+            if((_Day > 1 && _Day<=31) && (_Month > 1 && _Month <= 12) && (_Year > 1 && _Year <= 9999) )
+            {
+                return true;
+            }
+            else
+                return false;
         }
 
-
-        public string Name
+        public string ToString()
         {
-            get { return _Name; }
-            set { _Name = value; }
-        }
-
-        public void PrintDetails()
-        {
-            Console.WriteLine(_Name + " " + _Age + " " + _Gender + " " + _Std + " " + _Div + " " + _Marks);
+            return _Day+"/"+_Month+"/"+_Year;
         }
 
     }
