@@ -1,4 +1,4 @@
-﻿namespace Que_10
+﻿namespace Que_11
 {
     internal class Program
     {
@@ -15,11 +15,60 @@
         Finance = 3
     }
 
+    class WageEmp : Employee
+    {
+        private int _hours;
+        private int _rate;
+
+        public WageEmp() { }
+
+        public WageEmp(string des, double sal, DepartmentType dep, int hr, int rate) : base(des,sal,dep)
+        {
+            _hours = hr;
+            _rate = rate;
+        }
+
+        public void Accept()
+        {
+            base.Accept();
+            Console.Write("Enter the hours of work : ");
+            _hours = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter the rate per hour : ");
+            _rate = Convert.ToInt32(Console.ReadLine());
+        }
+
+        public void Print()
+        {
+            base.Print();
+            Console.WriteLine("Hours : " + _hours);
+            Console.WriteLine("Rate : "+_rate);
+        }
+
+        public string ToString()
+        {
+            return base.ToString() + " " + _hours + " " + _rate;
+        }
+
+        public int Rate
+        {
+            get { return _rate; }
+            set { _rate = value; }
+        }
+
+
+        public int Hours
+        {
+            get { return _hours; }
+            set { _hours = value; }
+        }
+
+    }
+
     class Supervisor : Employee
     {
         private int _subCordinates;
 
-        public Supervisor() {}
+        public Supervisor() { }
 
         public Supervisor(string des, double sal, DepartmentType dep, int subCord) : base(des, sal, dep)
         {
