@@ -1,29 +1,61 @@
-﻿using System.Data;
+﻿using System.Transactions;
 
-namespace Que_08
+namespace Que_09
 {
     internal class Program
     {
-        
         static void Main(string[] args)
         {
-            Employee emp = new Employee();
-            emp.Accept();
-            emp.Print();
-            Console.ReadLine();
+            Console.WriteLine("Hello, World!");
         }
     }
 
     enum DepartmentType
     {
-       Marketing = 1,
-       Advertising = 2,
-       Finance = 3
+        Marketing = 1,
+        Advertising = 2,
+        Finance = 3
     }
 
-    class Employee : Person 
+    class Manager : Employee
     {
-        private static int _id=100;
+        private double _Bonus;
+
+        public Manager() { }
+
+        public Manager(string des, double sal, DepartmentType dep,double bonus): base( des, sal,  dep)
+        {
+            _Bonus = bonus;
+        }
+       
+        public void Accept()
+        {
+            base.Accept();
+            Console.Write("Enter your bonus : ");
+            _Bonus = Convert.ToDouble(Console.ReadLine());
+        }
+
+        public void Print()
+        {
+            base.Print();
+            Console.WriteLine("Bonus : "+ _Bonus);
+        }
+
+        public string ToString()
+        {
+            return base.ToString + " " + _Bonus;
+        }
+        public double Bonus
+        {
+            get { return _Bonus; }
+            set { _Bonus = value; }
+        }
+
+    }
+
+    class Employee : Person
+    {
+        private static int _id = 100;
         private string _designation;
         private double _salary;
         private DepartmentType _type;
@@ -33,11 +65,11 @@ namespace Que_08
             _id++;
         }
 
-        public Employee(string des,double sal,DepartmentType dep)
+        public Employee(string des, double sal, DepartmentType dep)
         {
             _id++;
             _designation = des;
-            _salary = sal;  
+            _salary = sal;
             _type = dep;
         }
 
@@ -48,12 +80,12 @@ namespace Que_08
             Console.Write("Enter employee salary :- ");
             _salary = Convert.ToDouble(Console.ReadLine());
             Console.Write("Enter employee department type (1.MARK 2.ADV 3.FIN) :- ");
-            int dep_type  = Convert.ToInt32( Console.ReadLine());
-            if(dep_type == 1)
+            int dep_type = Convert.ToInt32(Console.ReadLine());
+            if (dep_type == 1)
             {
                 _type = DepartmentType.Marketing;
             }
-            else if(dep_type == 2) 
+            else if (dep_type == 2)
             {
                 _type = DepartmentType.Advertising;
             }
@@ -69,15 +101,10 @@ namespace Que_08
 
         public void Print()
         {
-            Console.WriteLine("Employee ID :- "+_id);
-            Console.WriteLine("Designation :- "+_designation);
+            Console.WriteLine("Employee ID :- " + _id);
+            Console.WriteLine("Designation :- " + _designation);
             Console.WriteLine("Salary :- " + _salary);
             Console.WriteLine("Department :- " + _type);
-        }
-
-        public string ToString()
-        {
-            return base.ToString() + _id + " " + _designation + " " + _salary + " " + _type ;
         }
 
         public DepartmentType Type
@@ -168,11 +195,6 @@ namespace Que_08
             set { _Name = value; }
         }
 
-        public string ToString()
-        {
-            return _Name + " " + _Address + " " + _Gender + " " + date.ToString();
-        }
-
         public void Print()
         {
             DateTime tod = DateTime.Today;
@@ -257,5 +279,5 @@ namespace Que_08
             return _Day + "/" + _Month + "/" + _Year;
         }
 
-    }
+    }                                                       
 }
